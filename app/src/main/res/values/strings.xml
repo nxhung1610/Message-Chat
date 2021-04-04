@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Login Gmail</string>
+    <string name="google">Google</string>
+    <string name="avatar">Avatar</string>
+    <string name="logout">Logout</string>
+    <string name="send">Send</string>
+    <string name="message">Message</string>
+    <string name="enter_your_message">Enter Your Message</string>
+</resources>
