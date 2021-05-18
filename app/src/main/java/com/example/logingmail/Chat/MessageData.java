@@ -5,15 +5,16 @@ import com.example.logingmail.UserProfile;
 import java.io.Serializable;
 
 public class MessageData implements Serializable {
-    private  String sender;
-    private  String message;
-    private  String urlAvatar;
-    private  UserProfile profile;
+    private String uid;
+    private String sender;
+    private String message;
+    private String urlAvatar;
 
     public MessageData() {
     }
 
-    public MessageData(String sender, String message, String urlAvatar) {
+    public MessageData(String uid, String sender, String message, String urlAvatar) {
+        this.uid = uid;
         this.sender = sender;
         this.message = message;
         this.urlAvatar = urlAvatar;
@@ -24,19 +25,14 @@ public class MessageData implements Serializable {
     }
 
     public String getMessage() {
-       return message;
+        return message;
     }
 
     public String getUrlAvatar() {
         return urlAvatar;
     }
 
-
-    public UserProfile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(UserProfile profile) {
-        this.profile = profile;
+    public String getUid() {
+        return uid;
     }
 }

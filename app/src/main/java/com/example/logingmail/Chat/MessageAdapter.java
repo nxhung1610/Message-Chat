@@ -63,7 +63,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             ImageView avatarIcon = holder.itemView.findViewById(R.id.avatarIcon);
             TextView nameSender = holder.itemView.findViewById(R.id.nameSender);
             Picasso.get().load(Uri.parse(messageDetail.getUrlAvatar())).into(avatarIcon);
-            nameSender.setText(messageDetail.getProfile().getName());
+            nameSender.setText(messageDetail.getSender());
         }
         catch (Exception e){
 
@@ -79,7 +79,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if(messageData.get(position).getSender().equals(user.getUid())){
+        if(messageData.get(position).getUid().equals(user.getUid())){
             return MSG_TYPE_RIGHT;
         }
         else{

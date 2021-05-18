@@ -58,36 +58,20 @@ public class MessageChatActivity extends AppCompatActivity {
 
     public void SendMessage(View view) {
         if(!messageSend.getText().toString().trim().equals("")){
-            HashMap<String,Object> hashMap = new HashMap<>();
-            hashMap.put("sender",userProfile.getUid());
-            hashMap.put("message",messageSend.getText().toString());
-            hashMap.put("urlAvatar",userProfile.getUrlAvatar());
-            reference.push().setValue(hashMap);
+            MessageData messageData = new MessageData(userProfile.getUid(),userProfile.getName(),messageSend.getText().toString(),userProfile.getUrlAvatar());
+            reference.push().setValue(messageData);
         }
         messageSend.setText("");
     }
+
 
     public  void ReceiveMessage(){
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 final MessageData messageDetail = snapshot.getValue(MessageData.class);
-                rootNode.getReference().child("Users").child(Objects.requireNonNull(messageDetail).getSender()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            UserProfile profile = snapshot.getValue(UserProfile.class);
-                            messageDetail.setProfile(profile);
-                            messageAdapter.add(messageDetail);
-                            messageChat.scrollToPosition(messageAdapter.getItemCount()-1);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                messageAdapter.add(messageDetail);
+                messageChat.scrollToPosition(messageAdapter.getItemCount()-1);
             }
 
             @Override
