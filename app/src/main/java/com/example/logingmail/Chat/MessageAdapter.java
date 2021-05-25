@@ -2,6 +2,7 @@ package com.example.logingmail.Chat;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logingmail.MessageChatActivity;
@@ -96,6 +98,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public void add(MessageData messageDetail){
         this.messageData.add(messageDetail);
+        notifyDataSetChanged();
+    }
+
+
+    public void removep(MessageData messageData){
+        this.messageData.removeIf(t ->t.getIdMessage().equals(messageData.getIdMessage()));
         notifyDataSetChanged();
     }
 }

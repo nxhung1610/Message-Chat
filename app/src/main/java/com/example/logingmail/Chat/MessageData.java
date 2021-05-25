@@ -1,10 +1,9 @@
 package com.example.logingmail.Chat;
 
-import com.example.logingmail.UserProfile;
-
 import java.io.Serializable;
 
 public class MessageData implements Serializable {
+    private String idMessage;
     private String uid;
     private String sender;
     private String message;
@@ -13,7 +12,8 @@ public class MessageData implements Serializable {
     public MessageData() {
     }
 
-    public MessageData(String uid, String sender, String message, String urlAvatar) {
+    public MessageData(String idMessage, String uid, String sender, String message, String urlAvatar) {
+        this.idMessage = idMessage;
         this.uid = uid;
         this.sender = sender;
         this.message = message;
@@ -34,5 +34,9 @@ public class MessageData implements Serializable {
 
     public String getUid() {
         return uid;
+    }
+
+    public String getIdMessage() {
+        return idMessage;
     }
 }

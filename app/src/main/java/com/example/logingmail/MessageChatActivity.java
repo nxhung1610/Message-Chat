@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 public class MessageChatActivity extends AppCompatActivity {
 
@@ -53,12 +54,14 @@ public class MessageChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(MessageChatActivity.this,messageData);
         messageChat.setAdapter(messageAdapter);
         ReceiveMessage();
+
+
     }
 
 
     public void SendMessage(View view) {
         if(!messageSend.getText().toString().trim().equals("")){
-            MessageData messageData = new MessageData(userProfile.getUid(),userProfile.getName(),messageSend.getText().toString(),userProfile.getUrlAvatar());
+            MessageData messageData = new MessageData(UUID.randomUUID().toString(),userProfile.getUid(),userProfile.getName(),messageSend.getText().toString(),userProfile.getUrlAvatar());
             reference.push().setValue(messageData);
         }
         messageSend.setText("");
@@ -81,7 +84,9 @@ public class MessageChatActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                final MessageData messageDetail = snapshot.getValue(MessageData.class);
+                messageAdapter.removep(messageDetail);
+                messageChat.scrollToPosition(messageAdapter.getItemCount()-1);
             }
 
             @Override
